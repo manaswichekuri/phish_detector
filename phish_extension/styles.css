@@ -1,0 +1,186 @@
+/* Modern UI with Gradient Design */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+:root {
+    --primary: #4776E6;
+    --secondary: #8E54E9;
+    --danger: #FF4B6E;
+    --success: #2ECC71;
+    --background: #f8f9fd;
+    --text: #2D3436;
+    --shadow: 0 4px 6px rgba(71, 118, 230, 0.1);
+    --gradient: linear-gradient(45deg, var(--primary), var(--secondary));
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: var(--background);
+    color: var(--text);
+    min-width: 400px;
+}
+
+.container {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+.input-group {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-bottom: var(--spacing-lg);
+    color: var(--text);
+    font-size: 1.75em;
+    font-weight: 700;
+    text-align: center;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #E5E9F2;
+    border-radius: 12px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #F8FAFC;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(71, 118, 230, 0.1);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+button {
+    padding: 12px 24px;
+    background: var(--gradient);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(71, 118, 230, 0.2);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(255, 105, 180, 0.4);
+}
+
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: var(--spacing-sm);
+}
+
+/* Icon styles */
+.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin-right: var(--spacing-sm);
+}
+
+#result {
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    border-radius: 12px;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+}
+
+#result.safe {
+    background: linear-gradient(135deg, #e6fff7 0%, #d4edda 100%);
+    color: var(--success);
+    border: 1px solid #c3e6cb;
+    animation: pulse 2s infinite;
+}
+
+#result.danger {
+    background: linear-gradient(135deg, #ffe6e6 0%, #f8d7da 100%);
+    color: var(--danger);
+    border: 1px solid #f5c6cb;
+    animation: pulse 2s infinite;
+}
+
+/* Status icon states */
+#result.safe::before,
+#result.danger::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: var(--spacing-sm);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#result.safe::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2300b894"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>');
+}
+
+#result.danger::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff6b6b"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>');
+}

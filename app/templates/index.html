@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>URL Phishing Detector</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div class="container">
+    <h2>URL Phishing Detector</h2>
+    <form method="post" action="/analyze" class="input-group">
+      <input type="text" name="url" placeholder="https://example.com" required>
+      <button type="submit">Analyze</button>
+    </form>
+
+    {% if result %}
+      {% set ml_label = result.ml.get('label') if result.ml else 0 %}
+      <div id="result" class="{% if ml_label==1 %}danger show{% else %}safe show{% endif %}">
+        <div><strong>Result for {{ result.url }}</strong></div>
+        <div><strong>Heuristic score:</strong> {{ result.score }}</div>
+        <ul>
+        {% for r in result.reasons %}
+          <li>{{ r }}</li>
+        {% endfor %}
+        </ul>
+        <h4>Features</h4>
+        <pre>{{ result.features }}</pre>
+        <h4>ML</h4>
+        <pre>{{ result.ml }}</pre>
+        <h4>VirusTotal</h4>
+        <pre>{{ result.vt }}</pre>
+        <h4>PhishTank</h4>
+        <pre>{{ result.pt }}</pre>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
